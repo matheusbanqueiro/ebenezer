@@ -46,7 +46,7 @@ const ListMusic = ({}: ListMusicProps) => {
   ];
 
   return (
-    <div className="flex flex-col gap-4 lg:ml-5 px-10 ml-5 mb-5">
+    <div className="flex flex-col gap-4 lg:ml-5 px-0 md:px-10 ml-5 mb-5">
       <h1 className="mt-4 font-bold dark:text-slate-100 text-slate-600 tracking-wide">
         Lista Músicas
       </h1>
