@@ -1,6 +1,5 @@
 "use client";
 import { memo, useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { ChevronLast } from "lucide-react";
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 
@@ -11,7 +10,7 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentMusicIndex, setCurrentMusicIndex] = useState(0); // Estado para controlar o índice da música atual
+  const [currentMusicIndex, setCurrentMusicIndex] = useState(0);
 
   const musics = [
     {
@@ -70,10 +69,15 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
       setIsPlaying(false);
     };
 
+    const handleEnded = () => {
+      nextMusic();
+    };
+
     if (audioElement) {
       audioElement.addEventListener("timeupdate", updateTime);
       audioElement.addEventListener("play", handlePlay);
       audioElement.addEventListener("pause", handlePause);
+      audioElement.addEventListener("ended", handleEnded);
     }
 
     return () => {
@@ -81,15 +85,18 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
         audioElement.removeEventListener("timeupdate", updateTime);
         audioElement.removeEventListener("play", handlePlay);
         audioElement.removeEventListener("pause", handlePause);
+        audioElement.removeEventListener("ended", handleEnded);
       }
     };
-  }, [currentMusicIndex, isPlaying]);
+  }, [currentMusicIndex]);
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
       if (isPlaying) {
-        audioRef.current.play();
+        audioRef.current
+          .play()
+          .catch((error) => console.log("Error playing audio:", error));
       }
     }
   }, [currentMusicIndex]);
@@ -97,7 +104,9 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
   useEffect(() => {
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.play();
+        audioRef.current
+          .play()
+          .catch((error) => console.log("Error playing audio:", error));
       } else {
         audioRef.current.pause();
       }
@@ -106,10 +115,18 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
 
   const playAudio = () => {
     setIsPlaying(true);
+    if (audioRef.current) {
+      audioRef.current
+        .play()
+        .catch((error) => console.log("Error playing audio:", error));
+    }
   };
 
   const pauseAudio = () => {
     setIsPlaying(false);
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
   };
 
   const formatTime = (time: number) => {
@@ -127,18 +144,31 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
     }
   };
 
-  const nextMusic = () => {
-    const newIndex = currentMusicIndex + 1;
-    if (newIndex < musics.length) {
-      setCurrentMusicIndex(newIndex);
+  const playNextMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current
+        .play()
+        .catch((error) => console.log("Error playing audio:", error));
     }
   };
 
+  const nextMusic = () => {
+    const newIndex = (currentMusicIndex + 1) % musics.length;
+    setCurrentMusicIndex(newIndex);
+    setCurrentTime(0);
+    setDuration(0);
+    setIsPlaying(true); // Adicionado para garantir que a música comece a tocar
+    playNextMusic(); // Certifica-se de tocar a próxima música
+  };
+
   const prevMusic = () => {
-    const newIndex = currentMusicIndex - 1;
-    if (newIndex >= 0) {
-      setCurrentMusicIndex(newIndex);
-    }
+    const newIndex = (currentMusicIndex - 1 + musics.length) % musics.length;
+    setCurrentMusicIndex(newIndex);
+    setCurrentTime(0);
+    setDuration(0);
+    setIsPlaying(true); // Adicionado para garantir que a música comece a tocar
+    playNextMusic(); // Certifica-se de tocar a música anterior
   };
 
   return (
