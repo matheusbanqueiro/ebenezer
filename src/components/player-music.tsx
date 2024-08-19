@@ -2,54 +2,24 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { ChevronLast } from "lucide-react";
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
+import { LoopIcon, SpeakerLoudIcon, SpeakerOffIcon } from "@radix-ui/react-icons";
 
-type PlayerMusicProps = {};
+type PlayerMusicProps = {
+  musics: {
+    music: string;
+    name: string;
+  }[];
+};
 
-const PlayerMusic = ({}: PlayerMusicProps) => {
+
+const PlayerMusic = ({ musics }: PlayerMusicProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentMusicIndex, setCurrentMusicIndex] = useState(0);
-
-  const musics = [
-    {
-      music: "/assets/music/hino18.mpga",
-      name: "Hino 18",
-    },
-    {
-      music: "/assets/music/hino257.mpga",
-      name: "Hino 257",
-    },
-    {
-      music: "/assets/music/jerico.mpga",
-      name: "Jericó",
-    },
-    {
-      music: "/assets/music/forca.mpga",
-      name: "Ancient of Days ( Força e Honra)",
-    },
-    {
-      music: "/assets/music/shine.mpga",
-      name: "Shine, Jesus, Shine",
-    },
-    {
-      music: "/assets/music/abertura7.mpga",
-      name: "Abertura N°7",
-    },
-    {
-      music: "/assets/music/sossegai.mpga",
-      name: "578 Sossegai",
-    },
-    {
-      music: "/assets/music/alone.mpga",
-      name: "In Chist Alone",
-    },
-    {
-      music: "/assets/music/blessed.mpga",
-      name: "Blessed Assurance",
-    },
-  ];
+  const [isRepeating, setIsRepeating] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const audioElement = audioRef.current;
@@ -69,8 +39,20 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
       setIsPlaying(false);
     };
 
+    const repeatMusic = () => {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
+    };
+
+    // Adiciona a repetição à lógica de `handleEnded`
     const handleEnded = () => {
-      nextMusic();
+      if (isRepeating) {
+        repeatMusic();
+      } else {
+        nextMusic();
+      }
     };
 
     if (audioElement) {
@@ -170,11 +152,14 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
     setIsPlaying(true); // Adicionado para garantir que a música comece a tocar
     playNextMusic(); // Certifica-se de tocar a música anterior
   };
+  const toggleMute = () => {
+    setIsMuted(prev => !prev);
+  };
 
   return (
     <div className="w-full">
       <div className="max-w-md mx-auto mt-8 p-4">
-        <audio key={currentMusicIndex} ref={audioRef} className="w-full">
+        <audio key={currentMusicIndex} ref={audioRef} className="w-full" muted={isMuted}>
           <source src={musics[currentMusicIndex].music} type="audio/mpeg" />
           Seu navegador não suporta o elemento de áudio.
         </audio>
@@ -184,22 +169,41 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
               {musics[currentMusicIndex].name}
             </p>
           </div>
-          <div className="mt-5 flex gap-4 items-center">
-            <button onClick={prevMusic}>
-              <ChevronLast className="w-6 h-6 text-sky-600 rotate-180" />
-            </button>
+          <div className="mt-5 flex gap-4 items-center w-full justify-around">
             <button
-              onClick={isPlaying ? pauseAudio : playAudio}
-              className="bg-sky-600 hover:bg-sky-600/90 text-white p-4 rounded-full"
+              onClick={toggleMute}
+              className={`${!isMuted ? 'text-white' : 'text-sky-500'} `}
             >
-              {isPlaying ? (
-                <PauseIcon className="w-6 h-6" />
+              {isMuted ? (
+                <SpeakerOffIcon className="w-5 h-5" />
               ) : (
-                <PlayIcon className="w-6 h-6" />
+                <SpeakerLoudIcon className="w-5 h-5" />
               )}
             </button>
-            <button onClick={nextMusic}>
-              <ChevronLast className="w-6 h-6 text-sky-600" />
+
+            <div className="flex gap-4">
+              <button onClick={prevMusic}>
+                <ChevronLast className="w-6 h-6 text-sky-600 rotate-180" />
+              </button>
+              <button
+                onClick={isPlaying ? pauseAudio : playAudio}
+                className="bg-sky-600 hover:bg-sky-600/90 text-white p-4 rounded-full"
+              >
+                {isPlaying ? (
+                  <PauseIcon className="w-6 h-6" />
+                ) : (
+                  <PlayIcon className="w-6 h-6" />
+                )}
+              </button>
+              <button onClick={nextMusic}>
+                <ChevronLast className="w-6 h-6 text-sky-600" />
+              </button>
+            </div>
+            <button
+              onClick={() => setIsRepeating(!isRepeating)}
+              className={`${isRepeating ? "text-sky-500" : "text-white"}`}
+            >
+              <LoopIcon className="w-5 h-5" />
             </button>
           </div>
           <div className="relative w-full mt-4">
@@ -211,9 +215,8 @@ const PlayerMusic = ({}: PlayerMusicProps) => {
               onChange={handleSeek}
               className="w-full h-1 dark:bg-slate-700 bg-slate-300 rounded-full appearance-none cursor-pointer"
               style={{
-                background: `linear-gradient(to right, #0ea5e9 ${
-                  (currentTime / duration) * 100
-                }%, #ccc ${(currentTime / duration) * 100}%)`,
+                background: `linear-gradient(to right, #0ea5e9 ${(currentTime / duration) * 100
+                  }%, #ccc ${(currentTime / duration) * 100}%)`,
               }}
             />
             <style jsx>{`
