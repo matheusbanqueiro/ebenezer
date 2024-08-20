@@ -6,8 +6,10 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
+  weight: ["400", "700"],
   variable: "--font-sans",
 });
+
 
 export const metadata: Metadata = {
   title: "Ebenézer",
@@ -23,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased ",
+          "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
