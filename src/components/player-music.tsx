@@ -3,6 +3,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { ChevronLast } from "lucide-react";
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 import { LoopIcon, SpeakerLoudIcon, SpeakerOffIcon } from "@radix-ui/react-icons";
+import ModeUse from "./modeUse";
 
 type PlayerMusicProps = {
   musics: {
@@ -158,12 +159,15 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
 
   return (
     <div className="w-full">
+
       <div className="max-w-md mx-auto mt-8 p-4">
+
         <audio key={currentMusicIndex} ref={audioRef} className="w-full" muted={isMuted}>
           <source src={musics[currentMusicIndex].music} type="audio/mpeg" />
           Seu navegador não suporta o elemento de áudio.
         </audio>
         <div className="flex-col flex items-center justify-between">
+          <ModeUse />
           <div className="justify-center w-full text-slate-800 dark:text-slate-50 mt-3 mb-5">
             <p className="font-bold text-3xl md:text-4xl text-center">
               {musics[currentMusicIndex].name}

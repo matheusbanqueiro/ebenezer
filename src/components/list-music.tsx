@@ -1,8 +1,5 @@
 "use client";
 import { ReactNode, memo, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
-
 type ListMusicProps = {
   listMusic: {
     number: number;
