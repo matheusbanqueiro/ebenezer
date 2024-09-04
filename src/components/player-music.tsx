@@ -71,7 +71,7 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
         audioElement.removeEventListener("ended", handleEnded);
       }
     };
-  }, [currentMusicIndex]);
+  }, [currentMusicIndex, isRepeating]);
 
   useEffect(() => {
     if (audioRef.current) {
