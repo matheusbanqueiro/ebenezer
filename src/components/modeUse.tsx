@@ -1,6 +1,6 @@
 "use client";
 import { memo } from "react";
-import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarShortcut,MenubarSeparator } from "./ui/menu-bar";
+import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarShortcut, MenubarSeparator } from "./ui/menu-bar";
 import { EllipsisVertical } from 'lucide-react';
 import { LoopIcon, SpeakerLoudIcon } from "@radix-ui/react-icons";
 
@@ -11,8 +11,8 @@ const modeUse = () => {
         <MenubarMenu>
           <MenubarTrigger><EllipsisVertical /></MenubarTrigger>
           <MenubarContent>
-          <MenubarItem>
-             Guia de Uso
+            <MenubarItem>
+              Guia de Uso
             </MenubarItem>
             <MenubarSeparator></MenubarSeparator>
             <MenubarItem>
