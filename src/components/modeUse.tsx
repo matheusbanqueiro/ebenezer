@@ -16,7 +16,7 @@ const modeUse = () => {
             </MenubarItem>
             <MenubarSeparator></MenubarSeparator>
             <MenubarItem>
-              Repete a Música <MenubarShortcut><LoopIcon /></MenubarShortcut>
+              Repete <MenubarShortcut><LoopIcon /></MenubarShortcut>
             </MenubarItem>
             <MenubarItem>Silencia <MenubarShortcut><SpeakerLoudIcon /></MenubarShortcut></MenubarItem>
           </MenubarContent>
