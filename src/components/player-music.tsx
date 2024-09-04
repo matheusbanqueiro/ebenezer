@@ -219,7 +219,7 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
               onChange={handleSeek}
               className="w-full h-1 dark:bg-slate-700 bg-slate-300 rounded-full appearance-none cursor-pointer"
               style={{
-                background: `linear-gradient(to right, #0ea5e9 ${(currentTime / duration) * 100
+                background: `linear-gradient(to right, #931616 ${(currentTime / duration) * 100
                   }%, #ccc ${(currentTime / duration) * 100}%)`,
               }}
             />
@@ -236,7 +236,7 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
               input[type="range"]::-moz-range-thumb {
                 width: 16px;
                 height: 16px;
-                background: #f5e2ff;
+                background: #DC2626;
                 border-radius: 50%;
                 cursor: pointer;
                 box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
