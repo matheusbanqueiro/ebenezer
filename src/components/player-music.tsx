@@ -228,7 +228,7 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
                 appearance: none;
                 width: 16px;
                 height: 16px;
-                background: #0ea5e9;
+                background: #dc2626;
                 border-radius: 50%;
                 cursor: pointer;
                 box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
