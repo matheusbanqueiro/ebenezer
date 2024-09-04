@@ -176,7 +176,7 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
           <div className="mt-5 flex gap-4 items-center w-full justify-around">
             <button
               onClick={toggleMute}
-              className={`${!isMuted ? 'text-white' : 'text-red-500'} `}
+              className={`${!isMuted ? 'dark:text-white text-slate-800' : 'text-red-500'} `}
             >
               {isMuted ? (
                 <SpeakerOffIcon className="w-5 h-5" />
@@ -205,7 +205,7 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
             </div>
             <button
               onClick={() => setIsRepeating(!isRepeating)}
-              className={`${isRepeating ? "text-red-500" : "text-white"}`}
+              className={`${isRepeating ? "text-red-500" : "dark:text-white text-slate-800"}`}
             >
               <LoopIcon className="w-5 h-5" />
             </button>
