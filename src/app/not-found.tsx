@@ -12,10 +12,10 @@ const NotFound = () => {
         className=""
       />
       <div className="text-center">
-        <p className="text-3xl font-semibold text-sky-500 ">
+        <p className="text-3xl font-semibold text-red-500 ">
           Ops! Erro: 404
         </p>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-sky-800 sm:text-5xl">
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-red-800 sm:text-5xl">
           Página Inexistente
         </h1>
         <p className="mt-6 text-base leading-7 text-neutral-600">

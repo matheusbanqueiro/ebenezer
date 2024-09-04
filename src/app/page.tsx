@@ -9,39 +9,39 @@ export default function Home() {
 
   const musicsAdoracaoInConcert = [
     {
-      music: "/assets/music/hino18.mpga",
+      music: "/assets/music/adoracaoInConcert/hino18.mpga",
       name: "Hino 18",
     },
     {
-      music: "/assets/music/hino257.mpga",
+      music: "/assets/music/adoracaoInConcert/hino257.mpga",
       name: "Hino 257",
     },
     {
-      music: "/assets/music/jerico.mpga",
+      music: "/assets/music/adoracaoInConcert/jerico.mpga",
       name: "Jericó",
     },
     {
-      music: "/assets/music/forca.mpga",
+      music: "/assets/music/adoracaoInConcert/forca.mpga",
       name: "Ancient of Days ( Força e Honra)",
     },
     {
-      music: "/assets/music/shine.mpga",
+      music: "/assets/music/adoracaoInConcert/shine.mpga",
       name: "Shine, Jesus, Shine",
     },
     {
-      music: "/assets/music/abertura7.mpga",
+      music: "/assets/music/adoracaoInConcert/abertura7.mpga",
       name: "Abertura N°7",
     },
     {
-      music: "/assets/music/sossegai.mpga",
+      music: "/assets/music/adoracaoInConcert/sossegai.mpga",
       name: "578 Sossegai",
     },
     {
-      music: "/assets/music/alone.mpga",
+      music: "/assets/music/adoracaoInConcert/alone.mpga",
       name: "In Chist Alone",
     },
     {
-      music: "/assets/music/blessed.mpga",
+      music: "/assets/music/adoracaoInConcert/blessed.mpga",
       name: "Blessed Assurance",
     },
   ];
@@ -83,8 +83,90 @@ export default function Home() {
       name: "Blessed Assurance",
     },
   ];
-  const musicsCantataNatal = [];
-  const listMusicCantataNatal = [];
+  const musicsCantataNatal = [
+    {
+      music: "/assets/music/cantataNatal/euSoQueroEstar.mpga",
+      name: "Eu Só Quero Estar Onde Estás",
+    },
+    {
+      music: "/assets/music/cantataNatal/potPourri.mpga",
+      name: "Pot-Pourri de Abertura",
+    },
+    {
+      music: "/assets/music/cantataNatal/coroaiRei.mpga",
+      name: "Coroai-o Rei dos Reis",
+    },
+    {
+      music: "/assets/music/cantataNatal/comoOvelhas.mpga",
+      name: "Como Ovelhas Perdidas",
+    },
+    {
+      music: "/assets/music/cantataNatal/forteCorajoso.mpga",
+      name: "Sê Forte e Corajoso",
+    },
+    {
+      music: "/assets/music/cantataNatal/eleFiel.mpga",
+      name: "Ele é Fiel",
+    },
+    {
+      music: "/assets/music/cantataNatal/celebrarJesus.mpga",
+      name: "Venha Celebrar a Jesus",
+    },
+    {
+      music: "/assets/music/cantataNatal/deusCaminho.mpga",
+      name: "Deus Nos Mostrará Um Caminho",
+    },
+    {
+      music: "/assets/music/cantataNatal/sobreNome.mpga",
+      name: "O Nome Sobre Todos os Nomes",
+    },
+    {
+      music: "/assets/music/cantataNatal/daiGracas.mpga",
+      name: "Dai Graças",
+    },
+  ];
+  const listMusicCantataNatal = [
+    {
+      number: 1,
+      name: "Eu Só Quero Estar Onde Estás",
+    },
+    {
+      number: 2,
+      name: "Pot-Pourri de Abertura",
+    },
+    {
+      number: 3,
+      name: "Coroai-o Rei dos Reis",
+    },
+    {
+      number: 4,
+      name: "Como Ovelhas Perdidas",
+    },
+    {
+      number: 5,
+      name: "Sê Forte e Corajoso",
+    },
+    {
+      number: 6,
+      name: "Ele É Fiel",
+    },
+    {
+      number: 7,
+      name: "Venha Celebrar a Jesus",
+    },
+    {
+      number: 8,
+      name: "Deus Nos Mostrará Um Caminho",
+    },
+    {
+      number: 9,
+      name: "O Nome Sobre Todos os Nomes",
+    },
+    {
+      number: 10,
+      name: "Dai Graças",
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -93,7 +175,7 @@ export default function Home() {
           <div className="flex flex-col flex-1">
             <div className="gap-6 flex flex-col mx-auto justify-center items-center my-4">
               <ModeToggle />
-              <h1 className="text-sky-600 dark:text-sky-500 font-bold text-3xl">
+              <h1 className="text-red-600 dark:text-red-500 font-bold text-3xl">
                 Playlist Ebenézer
               </h1>
             </div>
@@ -113,15 +195,11 @@ export default function Home() {
                 </div>
               </TabsContent>
               <TabsContent value="cantata-natal">
-                <div className="flex md:flex-row flex-col gap-4 items-center justify-center font-bold text-sky-500 text-2xl md:text-4xl">
-                  <Image
-                    src={"/assets/storyset/cuate/time-cuate.svg"}
-                    alt={"Timer"}
-                    width={300}
-                    height={300}
-                    className=""
-                  />
-                  <p>Em Breve!</p>
+                <div className="flex md:flex-row flex-col">
+                  <PlayerMusic musics={musicsCantataNatal} />
+                  <div className="lg:border-l">
+                    <ListMusic listMusic={listMusicCantataNatal} />
+                  </div>
                 </div>
               </TabsContent>
             </Tabs>
@@ -129,7 +207,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="bg-sky-900 dark:bg-slate-900 py-2 text-xs sm:gap-5 flex items-center justify-center text-slate-100 text-center">
+      <footer className="bg-red-900 dark:bg-slate-900 py-2 text-xs sm:gap-5 flex items-center justify-center text-slate-100 text-center">
         <p>Desenvolvido por</p>
         <Image
           src={"/assets/synchrony-studio.svg"}

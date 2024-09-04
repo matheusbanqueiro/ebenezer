@@ -18,7 +18,7 @@ const ListMusic = ({ listMusic }: ListMusicProps) => {
           key={music.number}
           className="flex gap-7 items-center justify-start"
         >
-          <h2 className="font-semibold sm:text-xl text-lg text-sky-600">
+          <h2 className="font-semibold sm:text-xl text-lg text-red-600">
             {music.number}
           </h2>
 

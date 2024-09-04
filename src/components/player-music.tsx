@@ -176,7 +176,7 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
           <div className="mt-5 flex gap-4 items-center w-full justify-around">
             <button
               onClick={toggleMute}
-              className={`${!isMuted ? 'text-white' : 'text-sky-500'} `}
+              className={`${!isMuted ? 'text-white' : 'text-red-500'} `}
             >
               {isMuted ? (
                 <SpeakerOffIcon className="w-5 h-5" />
@@ -187,11 +187,11 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
 
             <div className="flex gap-4">
               <button onClick={prevMusic}>
-                <ChevronLast className="w-6 h-6 text-sky-600 rotate-180" />
+                <ChevronLast className="w-6 h-6 text-red-600 rotate-180" />
               </button>
               <button
                 onClick={isPlaying ? pauseAudio : playAudio}
-                className="bg-sky-600 hover:bg-sky-600/90 text-white p-4 rounded-full"
+                className="bg-red-600 hover:bg-red-600/90 text-white p-4 rounded-full"
               >
                 {isPlaying ? (
                   <PauseIcon className="w-6 h-6" />
@@ -200,12 +200,12 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
                 )}
               </button>
               <button onClick={nextMusic}>
-                <ChevronLast className="w-6 h-6 text-sky-600" />
+                <ChevronLast className="w-6 h-6 text-red-600" />
               </button>
             </div>
             <button
               onClick={() => setIsRepeating(!isRepeating)}
-              className={`${isRepeating ? "text-sky-500" : "text-white"}`}
+              className={`${isRepeating ? "text-red-500" : "text-white"}`}
             >
               <LoopIcon className="w-5 h-5" />
             </button>
