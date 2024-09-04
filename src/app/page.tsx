@@ -1,11 +1,21 @@
-"use client";
+"use client"
 import ListMusic from "@/components/list-music";
 import PlayerMusic from "@/components/player-music";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ModeToggle } from "@/components/ui/toggle-mode";
+import type { Metadata } from "next";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [currentMusic, setCurrentMusic] = useState("Playlist Ebenézer");
+
+  const handleMusicChange = (musicName: string) => {
+    setCurrentMusic(musicName);
+  };
+  useEffect(() => {
+    document.title = `Ebenézer: ${currentMusic}`;
+  }, [currentMusic]);
 
   const musicsAdoracaoInConcert = [
     {
@@ -188,7 +198,7 @@ export default function Home() {
               </div>
               <TabsContent value="adoracao-concert">
                 <div className="flex md:flex-row flex-col">
-                  <PlayerMusic musics={musicsAdoracaoInConcert} />
+                  <PlayerMusic musics={musicsAdoracaoInConcert} onMusicChange={handleMusicChange}/>
                   <div className="lg:border-l">
                     <ListMusic listMusic={listMusicAdoracaoInConcert} />
                   </div>
@@ -196,7 +206,7 @@ export default function Home() {
               </TabsContent>
               <TabsContent value="cantata-natal">
                 <div className="flex md:flex-row flex-col">
-                  <PlayerMusic musics={musicsCantataNatal} />
+                  <PlayerMusic musics={musicsCantataNatal} onMusicChange={handleMusicChange}/>
                   <div className="lg:border-l">
                     <ListMusic listMusic={listMusicCantataNatal} />
                   </div>

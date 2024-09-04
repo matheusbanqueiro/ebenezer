@@ -10,10 +10,11 @@ type PlayerMusicProps = {
     music: string;
     name: string;
   }[];
+  onMusicChange: (musicName: string) => void; // Adicione essa linha
 };
 
 
-const PlayerMusic = ({ musics }: PlayerMusicProps) => {
+const PlayerMusic = ({ musics, onMusicChange }: PlayerMusicProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -22,9 +23,10 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
   const [isRepeating, setIsRepeating] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
+
   useEffect(() => {
     const audioElement = audioRef.current;
-
+    
     const updateTime = () => {
       if (audioElement) {
         setCurrentTime(audioElement.currentTime);
@@ -82,7 +84,8 @@ const PlayerMusic = ({ musics }: PlayerMusicProps) => {
           .catch((error) => console.log("Error playing audio:", error));
       }
     }
-  }, [currentMusicIndex]);
+    onMusicChange(musics[currentMusicIndex].name);
+  }, [currentMusicIndex, musics, onMusicChange]);
 
   useEffect(() => {
     if (audioRef.current) {
