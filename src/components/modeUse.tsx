@@ -1,6 +1,6 @@
 "use client";
 import { memo } from "react";
-import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarShortcut } from "./ui/menu-bar";
+import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarShortcut,MenubarSeparator } from "./ui/menu-bar";
 import { EllipsisVertical } from 'lucide-react';
 import { LoopIcon, SpeakerLoudIcon } from "@radix-ui/react-icons";
 
@@ -11,10 +11,14 @@ const modeUse = () => {
         <MenubarMenu>
           <MenubarTrigger><EllipsisVertical /></MenubarTrigger>
           <MenubarContent>
-            <MenubarItem>
-              Repetir a Música <MenubarShortcut><LoopIcon /></MenubarShortcut>
+          <MenubarItem>
+             Guia de Uso
             </MenubarItem>
-            <MenubarItem>Silenciar <MenubarShortcut><SpeakerLoudIcon /></MenubarShortcut></MenubarItem>
+            <MenubarSeparator></MenubarSeparator>
+            <MenubarItem>
+              Repete a Música <MenubarShortcut><LoopIcon /></MenubarShortcut>
+            </MenubarItem>
+            <MenubarItem>Silencia <MenubarShortcut><SpeakerLoudIcon /></MenubarShortcut></MenubarItem>
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
