@@ -26,7 +26,7 @@ const PlayerMusic = ({ musics, onMusicChange }: PlayerMusicProps) => {
 
   useEffect(() => {
     const audioElement = audioRef.current;
-    
+
     const updateTime = () => {
       if (audioElement) {
         setCurrentTime(audioElement.currentTime);

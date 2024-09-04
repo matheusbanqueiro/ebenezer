@@ -198,7 +198,7 @@ export default function Home() {
               </div>
               <TabsContent value="adoracao-concert">
                 <div className="flex md:flex-row flex-col">
-                  <PlayerMusic musics={musicsAdoracaoInConcert} onMusicChange={handleMusicChange}/>
+                  <PlayerMusic musics={musicsAdoracaoInConcert} onMusicChange={handleMusicChange} />
                   <div className="lg:border-l">
                     <ListMusic listMusic={listMusicAdoracaoInConcert} />
                   </div>
@@ -206,7 +206,7 @@ export default function Home() {
               </TabsContent>
               <TabsContent value="cantata-natal">
                 <div className="flex md:flex-row flex-col">
-                  <PlayerMusic musics={musicsCantataNatal} onMusicChange={handleMusicChange}/>
+                  <PlayerMusic musics={musicsCantataNatal} onMusicChange={handleMusicChange} />
                   <div className="lg:border-l">
                     <ListMusic listMusic={listMusicCantataNatal} />
                   </div>
