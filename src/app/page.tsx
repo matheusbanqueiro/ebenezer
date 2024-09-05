@@ -3,7 +3,6 @@ import ListMusic from "@/components/list-music";
 import PlayerMusic from "@/components/player-music";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ModeToggle } from "@/components/ui/toggle-mode";
-import type { Metadata } from "next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -216,7 +215,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-
       <footer className="bg-red-900 dark:bg-slate-900 py-2 text-xs sm:gap-5 flex items-center justify-center text-slate-100 text-center">
         <p>Desenvolvido por</p>
         <Image

@@ -3,10 +3,11 @@ import { memo } from "react";
 import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarShortcut, MenubarSeparator } from "./ui/menu-bar";
 import { EllipsisVertical } from 'lucide-react';
 import { LoopIcon, SpeakerLoudIcon } from "@radix-ui/react-icons";
+import ReportForm from "./report";
 
 const modeUse = () => {
   return (
-    <div className="items-start w-full">
+    <div className="items-center w-full flex justify-between">
       <Menubar className="w-fit">
         <MenubarMenu>
           <MenubarTrigger><EllipsisVertical /></MenubarTrigger>
@@ -22,6 +23,7 @@ const modeUse = () => {
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
+      <ReportForm />
     </div>
   );
 };
