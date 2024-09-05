@@ -43,7 +43,7 @@ const ReportProvider = ({ children }: ReportProps) => {
       try {
         setLoading(true);
 
-        const messageContent = `🚨 Chegou um reposte chegou! 🚨\n\n👤 nome: ${payload.name}\n\n💬 message: ${payload.message}`;
+        const messageContent = `🚨 Chegou um reporte chegou! 🚨\n\n👤 nome: ${payload.name}\n\n💬 message: ${payload.message}`;
 
         const response = await axios.post(webhookUrl, {
           content: messageContent,
