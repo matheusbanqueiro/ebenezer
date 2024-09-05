@@ -12,6 +12,7 @@ import React, {
   useContext,
   useState,
 } from "react";
+import Cookies from 'js-cookie';
 
 interface ReportContextProps {
   sendReportDiscord: (payload: ReportFormSchemaProps) => Promise<ReportInterface | undefined>;
@@ -40,14 +41,27 @@ const ReportProvider = ({ children }: ReportProps) => {
         return;
       }
 
+      const lastReportTime = Cookies.get('lastReportTime');
+      if (lastReportTime && Date.now() - parseInt(lastReportTime) < 3600000) {
+        toast({
+          title: "Aguarde antes de enviar outro reporte",
+          description: "Você deve esperar pelo menos 1 hora entre os reportes.",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
 
-        const messageContent = `🚨 Chegou um reporte chegou! 🚨\n\n👤 nome: ${payload.name}\n\n💬 message: ${payload.message}`;
+        const messageContent = `🚨 Chegou um reporte! 🚨\n\n👤 Nome: ${payload.name}\n\n💬 Mensagem: ${payload.message}`;
 
         const response = await axios.post(webhookUrl, {
           content: messageContent,
         });
+
+        Cookies.set('lastReportTime', Date.now().toString(), { expires: 1/24 });
 
         toast({
           title: "Enviar Reporte",
@@ -68,7 +82,6 @@ const ReportProvider = ({ children }: ReportProps) => {
     },
     [toast, webhookUrl]
   );
-
 
   const values = { sendReportDiscord };
 
