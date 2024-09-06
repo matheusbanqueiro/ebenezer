@@ -41,8 +41,7 @@ const ReportProvider = ({ children }: ReportProps) => {
   }, []);
 
   const handleAcceptCookies = () => {
-    // Define o consentimento no cookie e atualiza o estado
-    Cookies.set("cookieConsent", "true", { expires: 365 }); // 1 ano de expiração
+    Cookies.set("cookieConsent", "true", { expires: 365 }); 
     setCookieConsent(true);
   };
 

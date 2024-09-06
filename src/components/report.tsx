@@ -65,7 +65,7 @@ const ReportForm: React.FC = () => {
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={() => handleSubmit(handleSendReport)()} className="bg-red-600 hover:bg-red-600/80 font-semibold">Enviar</AlertDialogAction>
+            <AlertDialogAction onClick={() => handleSubmit(handleSendReport)()} className="bg-red-600 hover:bg-red-600/80 font-semibold text-white">Enviar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

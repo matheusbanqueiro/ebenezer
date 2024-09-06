@@ -1,4 +1,5 @@
 "use client"
+import AcceptCookies from "@/components/accept-cookies";
 import ListMusic from "@/components/list-music";
 import PlayerMusic from "@/components/player-music";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -176,9 +177,13 @@ export default function Home() {
       name: "Dai Graças",
     },
   ];
+  const handleCookieAccept = () => {
+    // Função para lidar com a aceitação de cookies
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
+       <AcceptCookies onAccept={handleCookieAccept}/>
       <main className="flex flex-col flex-1">
         <div className="lg:flex flex-1">
           <div className="flex flex-col flex-1">
