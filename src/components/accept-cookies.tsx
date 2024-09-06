@@ -14,7 +14,11 @@ import {
 } from "@/components/ui/sheet";
 import { Switch } from "./ui/switch";
 
-const AcceptCookies: React.FC = () => {
+interface AcceptCookiesProps {
+  onAccept?: () => void;
+}
+
+const AcceptCookies: React.FC<AcceptCookiesProps> = ({ onAccept }) => {
   const [isCookieEnabled, setIsCookieEnabled] = useState<boolean | null>(null);
   const [showConsentBanner, setShowConsentBanner] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);

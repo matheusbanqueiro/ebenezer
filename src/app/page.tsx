@@ -177,13 +177,10 @@ export default function Home() {
       name: "Dai Graças",
     },
   ];
-  const handleCookieAccept = () => {
-    // Função para lidar com a aceitação de cookies
-  };
 
   return (
     <div className="flex flex-col min-h-screen">
-       <AcceptCookies onAccept={handleCookieAccept}/>
+      <AcceptCookies />
       <main className="flex flex-col flex-1">
         <div className="lg:flex flex-1">
           <div className="flex flex-col flex-1">
