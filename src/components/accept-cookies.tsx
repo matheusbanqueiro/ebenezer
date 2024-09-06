@@ -31,14 +31,14 @@ const AcceptCookies: React.FC<AcceptCookiesProps> = ({ onAccept }) => {
   }, []);
 
   const handleAccept = () => {
-    Cookies.set("cookieConsent", "true", { expires: 365 });
+    Cookies.set("cookieConsent", "true", { expires: 2 });
     setIsVisible(false);
     setIsCookieEnabled(true);
     onAccept();
   };
 
   const handleDecline = () => {
-    Cookies.set("cookieConsent", "false", { expires: 365 });
+    Cookies.set("cookieConsent", "false", { expires: 2 });
     setIsVisible(false);
     setIsCookieEnabled(false);
   };
