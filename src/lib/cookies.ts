@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
 export const setCookie = (name: string, value: string, maxAgeInSeconds: number) => {
-  Cookies.set(name, value, { expires: maxAgeInSeconds / 86400 }); // expires in days
+  Cookies.set(name, value, { expires: maxAgeInSeconds / 86400 });
 };
 
 export const getCookie = (name: string): string | undefined => {

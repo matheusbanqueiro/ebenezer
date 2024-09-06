@@ -10,9 +10,11 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import Cookies from 'js-cookie';
+import AcceptCookies from "@/components/accept-cookies";
 
 interface ReportContextProps {
   sendReportDiscord: (payload: ReportFormSchemaProps) => Promise<ReportInterface | undefined>;
@@ -26,11 +28,36 @@ const ReportContext = createContext<ReportContextProps | undefined>(undefined);
 
 const ReportProvider = ({ children }: ReportProps) => {
   const [loading, setLoading] = useState(false);
+  const [cookieConsent, setCookieConsent] = useState<boolean>(false);
   const { toast } = useToast();
   const webhookUrl = process.env.NEXT_PUBLIC_DISCORD_WEBHOOK;
 
+  useEffect(() => {
+    // Verifica o consentimento ao carregar o componente
+    const consent = Cookies.get("cookieConsent");
+    if (consent === "true") {
+      setCookieConsent(true);
+    }
+  }, []);
+
+  const handleAcceptCookies = () => {
+    // Define o consentimento no cookie e atualiza o estado
+    Cookies.set("cookieConsent", "true", { expires: 365 }); // 1 ano de expiração
+    setCookieConsent(true);
+  };
+
   const sendReportDiscord = useCallback(
     async (payload: ReportFormSchemaProps): Promise<ReportInterface | undefined> => {
+      // Verifica o consentimento antes de enviar o reporte
+      if (!cookieConsent) {
+        toast({
+          title: "Consentimento necessário",
+          description: "Você precisa aceitar os cookies para enviar um reporte.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
       if (!webhookUrl) {
         toast({
           title: "Falha no webhook",
@@ -61,7 +88,7 @@ const ReportProvider = ({ children }: ReportProps) => {
           content: messageContent,
         });
 
-        Cookies.set('lastReportTime', Date.now().toString(), { expires: 1/24 });
+        Cookies.set('lastReportTime', Date.now().toString(), { expires: 1 / 24 }); // Expira em 1 hora
 
         toast({
           title: "Enviar Reporte",
@@ -80,7 +107,7 @@ const ReportProvider = ({ children }: ReportProps) => {
         setLoading(false);
       }
     },
-    [toast, webhookUrl]
+    [toast, webhookUrl, cookieConsent] // Adiciona `cookieConsent` como dependência
   );
 
   const values = { sendReportDiscord };
@@ -88,6 +115,7 @@ const ReportProvider = ({ children }: ReportProps) => {
   return (
     <ReportContext.Provider value={values}>
       {loading && <Loading />}
+      {!cookieConsent && <AcceptCookies onAccept={handleAcceptCookies} />}
       {children}
     </ReportContext.Provider>
   );

@@ -48,7 +48,7 @@ const ReportForm: React.FC = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Encontrou algo?</AlertDialogTitle>
             <AlertDialogDescription>
-              Nos diga o que aconteceu, nos reporte
+              Nos diga o que aconteceu
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="flex flex-col gap-3">
